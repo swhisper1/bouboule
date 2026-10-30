@@ -1,0 +1,187 @@
+/* ==========================================================
+   Boules satisfaisantes : apparence et mise en page
+   Toutes les tailles internes sont en "em". Le script règle la
+   taille de police de #stage (largeur / 27) pour que l'interface
+   s'adapte à n'importe quel écran en gardant le format 9:16.
+   ========================================================== */
+
+:root {
+  --fond: #06070c;
+  --texte: #e8ecff;
+  --accent: #7aa2ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Scène 9:16 (largeur/hauteur fixées par script.js) ---------- */
+#stage {
+  position: relative;
+  overflow: hidden;
+  width: 360px;
+  height: 640px;
+  font-size: 13px;
+  background: radial-gradient(ellipse at 50% 40%, #151b30 0%, #0a0c17 55%, #05060b 100%);
+}
+
+#canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---------- Compteur ---------- */
+#hud {
+  position: absolute;
+  top: 3.5%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.4em;
+}
+
+#count {
+  font-size: 2.6em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+#count-label {
+  font-size: 1.1em;
+  opacity: 0.55;
+}
+
+/* ---------- Message de départ ---------- */
+#hint {
+  position: absolute;
+  top: 40.6%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+#hint.hidden {
+  opacity: 0;
+}
+
+/* ---------- Commandes ---------- */
+#controls {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 2.5%;
+  padding: 0.8em;
+  display: grid;
+  gap: 0.7em;
+  background: rgba(14, 17, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.1em;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+#buttons {
+  display: flex;
+  gap: 0.5em;
+}
+
+button {
+  flex: 1;
+  padding: 0.75em 0.2em;
+  font: inherit;
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--texte);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.8em;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: transparent;
+  color: #0a0c17;
+}
+
+#btn-toggle {
+  flex: 0 0 3em;
+}
+
+#sliders {
+  display: grid;
+  gap: 0.5em;
+}
+
+#sliders.collapsed {
+  display: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 4.6em 1fr 3.6em;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.lbl {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+output {
+  font-size: 0.85em;
+  text-align: right;
+  opacity: 0.8;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
